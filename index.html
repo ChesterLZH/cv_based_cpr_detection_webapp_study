@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="" />
+    <meta name="author" content="Peter Gyory, Clement Zheng, Chester Lim" />
+    <meta name="theme-color" content="#B12A34" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+
+    <link
+      rel="stylesheet"
+      href="/Users/chester/Documents/VSCode/aruco_CPR_combined/style.css"
+    />
+
+    <style></style>
+  </head>
+
+  <body>
+
+    <!-- login screen -->
+    <div id = "loginScreen">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Register</a>
+          </ul>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <button id = "loginBtn" type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- results screen -->
+    <div id = "resultsScreen">
+      <h1>Results</h1>
+      <div id = "graph">
+        <canvas id="app-canvas"></canvas>
+      </div>
+    </div>
+
+    <!-- cpr screen -->
+    <div>
+      <div>
+        <!-- timer div -->
+        <div class="timerDiv container-sm border border-dark">
+          <div class="row stats">
+            <div class = "col-sm-3">
+              <button class = playBtn>&#9658; Start</button>
+            </div>
+            <div id="timer" class = "col-sm-3">Time: Error</div>
+          </div>
+      </div>
+      <!-- performance div -->
+      <div class = "performanceDiv container-sm"> 
+        <div class="stats">
+          <h1>Compressions:</h1>
+          <div id="count1">0</div>
+        </div>
+        <div class="stats">
+          <h1>ECC rate per min:</h1>
+          <div id="count2">0</div>
+        </div>
+      </div>
+      <!-- AED div -->
+      <div class = "aedDiv container-sm ">
+        <div class="row justify-content-sm-center">
+          <div class = "col-sm-3">
+            <button class = playBtn>&#9658; AED on</button>
+          </div>
+          <div class = "col-sm-3">
+            <button class = playBtn>&#9658; AED screen</button>
+          </div>
+          <div class = "col-sm-3">
+            <button class = playBtn>&#9658; AED shock</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- beholder div -->
+    <div id="toggleScreen">&#10562;</div>
+
+    <!-- detection div is not class = "active" by default -->
+    <div id="detectionDiv" >
+      <canvas id="detection-canvas"></canvas>
+      <canvas id="detection-canvas-overlay"></canvas>
+
+      <div id="parametersMenu">
+        <div class="parameterItem">
+          <span>Camera Feed ID</span>
+          <select name="CAMERA_INDEX" id="CAMERA_INDEX">
+            <option value="0" label="0" selected></option>
+          </select>
+        </div>
+        <div class="parameterItem">
+          <span>Video Size</span>
+          <select name="VIDEO_SIZE_INDEX" id="VIDEO_SIZE_INDEX">
+            <option value="0" label="320&times;240"></option>
+            <option value="1" label="640&times;480" selected></option>
+            <option value="2" label="1280&times;720"></option>
+            <option value="2" label="1920&times;1080"></option>
+          </select>
+        </div>
+        <div class="parameterItem">
+          <span>Min Marker Distance</span>
+          <input
+            id="MIN_MARKER_DISTANCE"
+            type="number"
+            name="MIN_MARKER_DISTANCE"
+            min="1"
+            max="50"
+            value="10"
+            step="1"
+          />
+        </div>
+        <div class="parameterItem">
+          <span>Min Marker Perimeter</span>
+          <input
+            id="MIN_MARKER_PERIMETER"
+            type="number"
+            name="MIN_MARKER_PERIMETER"
+            min="0.01"
+            max="0.99"
+            value="0.2"
+            step="0.01"
+          />
+        </div>
+        <div class="parameterItem">
+          <span>Max Marker Perimeter</span>
+          <input
+            id="MAX_MARKER_PERIMETER"
+            type="number"
+            name="MAX_MARKER_PERIMETER"
+            min="0.01"
+            max="0.99"
+            value="0.8"
+            step="0.01"
+          />
+        </div>
+        <div class="parameterItem">
+          <span>Size After Perspective Removal</span>
+          <input
+            id="SIZE_AFTER_PERSPECTIVE_REMOVAL"
+            type="number"
+            name="SIZE_AFTER_PERSPECTIVE_REMOVAL"
+            min="1"
+            max="200"
+            value="49"
+            step="1"
+          />
+        </div>
+        <div class="parameterItem">
+          <span>Contrast</span>
+          <input
+            id="IMAGE_CONTRAST"
+            type="number"
+            name="IMAGE_CONTRAST"
+            min="-100"
+            max="100"
+            value="0"
+            step="1"
+          />
+        </div>
+        <div class="parameterItem">
+          <span>Brightness</span>
+          <input
+            id="IMAGE_BRIGHTNESS"
+            type="number"
+            name="IMAGE_BRIGHTNESS"
+            min="-100"
+            max="100"
+            value="0"
+            step="1"
+          />
+        </div>
+        <div class="parameterItem">
+          <span>Grayscale</span>
+          <input
+            id="IMAGE_GRAYSCALE"
+            type="number"
+            name="IMAGE_GRAYSCALE"
+            min="0"
+            max="100"
+            value="0"
+            step="1"
+          />
+        </div>
+        <div class="parameterItem">
+          <button id="torchButton">Torch</button>
+        </div>
+      </div>
+    </div>
+
+      <!-- <div class="stats">
+        <h1>Ventilations:</h1>
+        <div id="vent">0</div>
+      </div>
+
+      <div class="stats">
+        <h1>Vent volume:</h1>
+        <div id="volume">0</div>
+      </div>
+
+      <div class="stats">
+        <h1>Vent speed:</h1>
+        <div id="ventSpeed">0</div>
+      </div>
+
+      <div class = "stats">
+        <h1>Score</h1>
+        <div id = "score"></div>
+      </div> -->
+
+
+      <!-- WRITE APPLICATION IN HERE -->
+      <!-- WRITE APPLICATION IN HERE -->
+      <!-- WRITE APPLICATION IN HERE -->
+
+      
+    <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/js/background.js"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/js/beholder.js"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/js/math.min.js"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>
