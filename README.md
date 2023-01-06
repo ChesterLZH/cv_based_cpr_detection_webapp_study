@@ -1,5 +1,5 @@
 # <strong>OpenCV CPR detection using ARUCO library</strong><br>
-Pre-production code, permisson to post publicly has been granted
+Pre-production code, permisson to post code publicly has been granted.<br>
 <br>
 OpenCV based webapp using Aruco library to track and analyse CPR performance data to provide effective CPR coaching at low cost and manpower <br>
 <br>
