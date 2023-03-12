@@ -10,7 +10,7 @@ const AR = {};
 const beholder = { updateCallbacks: [] };
 let detectionParams = {
   CAMERA_INFO: {},
-  VIDEO_SIZE: { width: { exact: 640 }, height: { exact: 480 } },
+  VIDEO_SIZE: { width: { exact: 320 }, height: { exact: 240 } },
   MIN_MARKER_DISTANCE: 10,
   MIN_MARKER_PERIMETER: 0.2,
   MAX_MARKER_PERIMETER: 0.8,
@@ -92,9 +92,10 @@ beholder.startCameraFeed = function startCameraFeed() {
       video: {
         width: detectionParams.VIDEO_SIZE.width,
         height: detectionParams.VIDEO_SIZE.height,
+        //deviceId: detectionParams.CAMERA_INFO,
         //default to rear camera
          facingMode: 'environment' 
-        //deviceId: detectionParams.CAMERA_INFO
+        
       }
     })
     .then(stream => {

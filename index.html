@@ -5,24 +5,29 @@
     <meta name="author" content="Peter Gyory, Clement Zheng, Chester Lim" />
     <meta name="theme-color" content="#B12A34" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CPR</title>
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
 
     <!-- bootstrap and chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
 
     <link
       rel="stylesheet"
-      href="style.css"
+      href="/Users/chester/Documents/VSCode/aruco_CPR_combined/style.css"
     />
 
     <style></style>
   </head>
 
   <body>
-
     <!-- login screen -->
-    <div id = "loginScreen">
+    <div id="loginScreen">
       <div class="card text-center">
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs">
@@ -31,28 +36,42 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Register</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
           <form>
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+              />
             </div>
-            <button id = "loginBtn" type="submit" class="btn btn-primary">Login</button>
+            <button id="loginBtn" type="submit" class="btn btn-primary">
+              Login
+            </button>
           </form>
         </div>
       </div>
     </div>
 
     <!-- results screen -->
-    <div id = "resultsScreen">
+    <div id="resultsScreen">
       <h1>Results</h1>
-      <div id = "graph">
+      <div id="graph">
         <canvas id="app-canvas"></canvas>
       </div>
     </div>
@@ -63,47 +82,89 @@
         <!-- timer div -->
         <div class="timerDiv border border-dark">
           <div class="row stats">
-            <div class = "col">
-              <button class = playBtn>&#9658; Start</button>
+            <div class="col">
+              <button class="playBtn">&#9658; Start</button>
             </div>
-            <div class = "col">
+            <div class="col">
               <div id="timer">Time: Error</div>
             </div>
           </div>
-      </div>
-      <!-- performance div -->
-      <div class = "performanceDiv"> 
-        <div class="stats">
-          <h1>Compressions:</h1>
-          <div id="count1">0</div>
         </div>
-        <div class="stats">
-          <h1>ECC rate per min:</h1>
-          <div id="count2">0</div>
+        <!-- performance div -->
+        <div class="performanceDiv">
+          <div id = "cprState">Compressions</div>
+          <div>
+            <!-- CPR div -->
+            <div id="countCom" class = "counter">-</div>
+            <!-- compression div -->
+            <div class="row justify-content-center">
+              <!-- cpm cols -->
+              <div class = "col">
+                <div class = "perfTitle">Speed</div>
+                <div id = "Slow" class = "perfCol">too slow</div>
+                <div id = "Right" class = "perfCol">just right</div>
+                <div id = "Fast"class = "perfCol">too fast</div>
+              </div>
+              <!-- depth cols -->
+              <div id = "depthCol" class = "col">
+                <div class = "perfTitle">Depth</div>
+                <div id = "depthShallow" class = "perfCol">too shallow</div>
+                <div id = "depthRight" class = "perfCol">just right</div>
+                <div id = "depthDeep" class = "perfCol">too deep</div>
+              </div>
+              <!-- volume cols -->
+              <div id = "volumeCol" class = "col volume">
+                <div class = "perfTitle">Volume</div>
+                <div id = "volLittle" class = "perfCol">too little</div>
+                <div id = "volRight" class = "perfCol">just right</div>
+                <div id = "volMuch" class = "perfCol">too much</div>
+              </div>
+            </div>
+            <!-- vent div -->
+            <div class="row justify-content-center">
+              <!-- vpm cols -->
+              <!-- <div class = "col">
+                <div class = "perfTitle">Speed</div>
+                <div id = "vpmSlow" class = "perfCol">too slow</div>
+                <div id = "vpmRight" class = "perfCol">just right</div>
+                <div id = "vpmFast"class = "perfCol">too fast</div>
+              </div> -->
+              <!-- volume cols -->
+              <!-- <div class = "col">
+                <div class = "perfTitle">Volume</div>
+                <div id = "volLittle" class = "perfCol">too little</div>
+                <div id = "volRight" class = "perfCol">just right</div>
+                <div id = "volMuch" class = "perfCol">too much</div>
+              </div>
+            </div> -->
+          </div>
+          <!-- manikin div -->
+          <div class = "row justify-content-center">
+            <img id = "manikinDrawing" src="img/manikin_orig.png" alt= "image_error_manikin">
+          </div>
         </div>
       </div>
       <!-- AED div -->
-      <div class = "aedDiv">
+      <div class="aedDiv">
         <div class="row justify-content-center">
-          <div class = "col-3">
-            <button class = playBtn>AED power</button>
+          <div class="col">
+            <button id = "aedPowerOn"><img src = "img/on_icon.svg" height = "44" width = "44"></button>
           </div>
-          <div class = "col-3">
-            <button class = playBtn>AED screen</button>
+          <div class="col">
+            <div id="aedScreen">AED SCREEN</div>
           </div>
-          <div class = "col-3">
-            <button class = playBtn>AED shock</button>
+          <div class="col">
+            <button id = "aedShock"><img src = "img/lightning_icon.svg" height = "44" width = "44"></button>
           </div>
         </div>
       </div>
     </div>
 
-
     <!-- beholder divs -->
     <div id="toggleScreen">&#10562;</div>
 
     <!-- detection div is not class = "active" by default -->
-    <div id="detectionDiv" class = "active">
+    <div id="detectionDiv" class="active">
       <canvas id="detection-canvas"></canvas>
       <canvas id="detection-canvas-overlay"></canvas>
 
@@ -214,10 +275,14 @@
     </div>
 
     <!-- scripts -->
-    <script src="js/background.js"></script>
-    <script src="js/beholder.js"></script>
-    <script src="js/math.min.js"></script>
-    <script src="index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/js/background.js"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/js/beholder.js"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/js/math.min.js"></script>
+    <script src="/Users/chester/Documents/VSCode/aruco_CPR_combined/index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

@@ -1,5 +1,10 @@
 /* styles for beholder */
 
+@font-face {
+  font-family:"pressStart";
+  src: url("PressStart2P-Regular.ttf") format("truetype");
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -130,6 +135,85 @@ html {
   background-color: white;
 }
 
+#cprState{
+  text-align: center;
+  font-size: 2rem;
+}
+
+#depthCol{
+  display: block;
+}
+
+#volumeCol{
+  display: none;
+}
+
+#depthShallow{
+  background-color: lightgrey;
+}
+
+#depthRight{
+  background-color: lightgrey;
+}
+
+#depthDeep{
+  background-color: lightgrey;
+}
+
+#cpmSlow{
+  background-color: lightgrey;
+}
+
+#cpmRight{
+  background-color: lightgrey;
+}
+
+#cpmFast{
+  background-color: lightgrey;
+}
+
+#aedPower{
+  padding: 1rem;
+  margin: 0rem;
+  border-radius: 50%;
+  background-color: white;
+}
+
+#aedPowerOn{
+  padding: 1rem;
+  margin: 0rem;
+  border-radius: 50%;
+  background-color: rgb(59, 241, 18);
+}
+
+#aedShock{
+  padding: 1rem;
+  margin: 0rem;
+  border-radius: 50%;
+  background-color: orangered;
+}
+
+#aedShockBlink{
+  padding: 1rem;
+  margin: 0rem;
+  border-radius: 50%;
+  background-color: rgb(255, 138, 96);
+}
+
+#aedScreen{
+  font-family: "pressStart";
+  color: white;
+  text-align: center;
+  background-color: black;
+  width: 9rem;
+  height: 8rem;
+}
+
+.counter{
+  text-align: center;
+  font-size: 2rem;
+}
+
 .stats {
   position: relative;
   align-items: center;
@@ -160,4 +244,19 @@ html {
   border-radius: 1rem;
   font-size: 1.2rem;
   background-color: rgb(59, 241, 18);
+}
+
+.perfTitle{
+  padding: 0.7rem;
+  margin: 0.3rem;
+  width: 10rem;
+  text-align: center;
+}
+
+.perfCol{
+  padding: 0.7rem;
+  margin: 0.3rem;
+  width: 10rem;
+  background-color: lightgray;
+  text-align: center;
 }
