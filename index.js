@@ -1,13 +1,13 @@
 // markers
-var comMarker0 = getMarker(0); //depth0
-var comMarker1 = getMarker(256); //depth1
-var comMarker2 = getMarker(768); //depth2
-var comMarker3 = getMarker(3); //depth3
-var ventMarker0 = getMarker(64); //vent0
-var ventMarker1 = getMarker(320); //vent1
-var ventMarker2 = getMarker(576); //vent2
-var aedMarker0 = getMarker(7); //AED1
-var aedMmarker1 = getMarker(8); //AED2
+var comMarker0 = getMarker(256); //depth0
+var comMarker1 = getMarker(336); //depth1
+var comMarker2 = getMarker(272); //depth2
+var comMarker3 = getMarker(0); //depth3
+var ventMarker0 = getMarker(320); //vent0
+var ventMarker1 = getMarker(64); //vent1
+var ventMarker2 = getMarker(80); //vent2
+var aedMarker0 = getMarker(512); //AED1
+var aedMmarker1 = getMarker(768); //AED2
 
 // timer vars
 var click1 = 0;
