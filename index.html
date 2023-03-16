@@ -96,9 +96,9 @@
           <div>
             <!-- CPR div -->
             <div id="countCom" class = "counter">-</div>
-            <!-- compression div -->
+            <!-- performance div -->
             <div class="row justify-content-center">
-              <!-- cpm cols -->
+              <!-- cpm / vpm cols -->
               <div class = "col">
                 <div class = "perfTitle">Speed</div>
                 <div id = "Slow" class = "perfCol">too slow</div>
@@ -115,28 +115,11 @@
               <!-- volume cols -->
               <div id = "volumeCol" class = "col volume">
                 <div class = "perfTitle">Volume</div>
+                <div id = "volNone" class = "perfCol">None</div>
                 <div id = "volLittle" class = "perfCol">too little</div>
                 <div id = "volRight" class = "perfCol">just right</div>
-                <div id = "volMuch" class = "perfCol">too much</div>
               </div>
             </div>
-            <!-- vent div -->
-            <div class="row justify-content-center">
-              <!-- vpm cols -->
-              <!-- <div class = "col">
-                <div class = "perfTitle">Speed</div>
-                <div id = "vpmSlow" class = "perfCol">too slow</div>
-                <div id = "vpmRight" class = "perfCol">just right</div>
-                <div id = "vpmFast"class = "perfCol">too fast</div>
-              </div> -->
-              <!-- volume cols -->
-              <!-- <div class = "col">
-                <div class = "perfTitle">Volume</div>
-                <div id = "volLittle" class = "perfCol">too little</div>
-                <div id = "volRight" class = "perfCol">just right</div>
-                <div id = "volMuch" class = "perfCol">too much</div>
-              </div>
-            </div> -->
           </div>
           <!-- manikin div -->
           <div class = "row justify-content-center">
@@ -192,7 +175,7 @@
             name="MIN_MARKER_DISTANCE"
             min="1"
             max="50"
-            value="10"
+            value="0"
             step="1"
           />
         </div>
@@ -204,7 +187,7 @@
             name="MIN_MARKER_PERIMETER"
             min="0.01"
             max="0.99"
-            value="0.2"
+            value="0.0"
             step="0.01"
           />
         </div>
@@ -228,7 +211,7 @@
             name="SIZE_AFTER_PERSPECTIVE_REMOVAL"
             min="1"
             max="200"
-            value="49"
+            value="110"
             step="1"
           />
         </div>
