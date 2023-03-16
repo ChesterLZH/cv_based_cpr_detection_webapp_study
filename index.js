@@ -13,7 +13,7 @@ var aedMmarker1 = getMarker(768); //AED2
 var click1 = 0;
 var click2 = 0;
 
-let timer = 120;
+let timer = 300;
 let miliTimer = 12000;
 let timerId;
 
